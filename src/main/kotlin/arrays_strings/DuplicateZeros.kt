@@ -2,18 +2,59 @@ package arrays_strings
 
 import java.util.*
 
-fun duplicateZeros(arr: IntArray): Unit {
-    val queue: Queue<Int> = LinkedList();
-    arr.forEachIndexed { index, item ->
-        if (item == 0) {
-            queue.add(0)
-            queue.add(0)
-        } else {
-            queue.add(item);
+class DuplicateZeros {
+
+    /**
+
+    Given a fixed-length integer array arr, duplicate each occurrence of zero, shifting the remaining elements to the right.
+
+    Note that elements beyond the length of the original array are not written. Do the above modifications to the input array in place and do not return anything.
+
+
+
+    Example 1:
+
+    Input: arr = [1,0,2,3,0,4,5,0]
+    Output: [1,0,0,2,3,0,0,4]
+    Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
+    Example 2:
+
+    Input: arr = [1,2,3]
+    Output: [1,2,3]
+    Explanation: After calling your function, the input array is modified to: [1,2,3]
+
+
+    Constraints:
+
+    1 <= arr.length <= 104
+    0 <= arr[i] <= 9
+     */
+
+//https://www.youtube.com/watch?v=gaB-guUxCWI
+//https://leetcode.com/problems/duplicate-zeros/
+
+    fun duplicateZeros(arr: IntArray) {
+        val queue: Queue<Int> = LinkedList()
+        arr.forEachIndexed { index, item ->
+            if (item == 0) {
+                queue.add(0)
+                queue.add(0)
+            } else {
+                queue.add(item)
+            }
+
+            val first = queue.poll()
+            arr[index] = first
         }
 
-        val first = queue.poll();
-        arr[index] = first;
     }
 
+
+}
+
+fun main() {
+    val arr = intArrayOf(1, 0, 2, 3, 0, 4, 5, 0)
+    val obj = DuplicateZeros()
+    obj.duplicateZeros(arr)
+    println(arr.asList())
 }
